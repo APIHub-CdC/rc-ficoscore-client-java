@@ -1,65 +1,57 @@
-# rc-ficoscore-client-java
+package com.cdc.apihub.mx.RC.FicoScore.api;
 
-Esta API reporta el historial crediticio, el cumplimiento de pago de los compromisos que la persona ha adquirido con entidades financieras, no financieras e instituciones comerciales que dan crédito o participan en actividades afines al crédito. En esta versión se retornan los campos del Crédito Asociado a Nomina (CAN) en el nodo de créditos.
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-## Requisitos
+import com.cdc.apihub.mx.RC.FicoScore.api.ReporteDeCreditoConFicoScoreApi;
+import com.cdc.apihub.mx.RC.FicoScore.client.ApiClient;
+import com.cdc.apihub.mx.RC.FicoScore.client.ApiException;
+import com.cdc.apihub.mx.RC.FicoScore.model.CatalogoEstados;
+import com.cdc.apihub.mx.RC.FicoScore.model.CatalogoTipoAsentamiento;
+import com.cdc.apihub.mx.RC.FicoScore.model.CatalogoTipoDomicilio;
+import com.cdc.apihub.mx.RC.FicoScore.model.Consultas;
+import com.cdc.apihub.mx.RC.FicoScore.model.Creditos;
+import com.cdc.apihub.mx.RC.FicoScore.model.DomicilioPeticion;
+import com.cdc.apihub.mx.RC.FicoScore.model.DomiciliosRespuesta;
+import com.cdc.apihub.mx.RC.FicoScore.model.Empleos;
+import com.cdc.apihub.mx.RC.FicoScore.model.Mensajes;
+import com.cdc.apihub.mx.RC.FicoScore.model.PersonaPeticion;
+import com.cdc.apihub.mx.RC.FicoScore.model.Respuesta;
+import com.cdc.apihub.mx.RC.FicoScore.model.Scores;
+import com.cdc.apihub.signer.manager.interceptor.SignerInterceptor;
 
-1. Java >= 1.7
-2. Maven >= 3.3
+import okhttp3.OkHttpClient;
 
-## Instalación
+import java.util.concurrent.TimeUnit;
 
-Para la instalación de las dependencias se deberá ejecutar el siguiente comando:
-
-```shell
-mvn install -Dmaven.test.skip=true
-```
-
-> **NOTA:** Este fragmento del comando *-Dmaven.test.skip=true* evitará que se lance la prueba unitaria.
+import org.junit.Assert;
+import org.junit.Before;
 
 
-## Guía de inicio
-
-### Paso 1. Agregar el producto a la aplicación
-
-Al iniciar sesión seguir los siguientes pasos:
-
- 1. Dar clic en la sección "**Mis aplicaciones**".
- 2. Seleccionar la aplicación.
- 3. Ir a la pestaña de "**Editar '@tuApp**' ".
-    <p align="center">
-      <img src="https://github.com/APIHub-CdC/imagenes-cdc/blob/master/edit_applications.jpg" width="900">
-    </p>
- 4. Al abrirse la ventana emergente, seleccionar el producto.
- 5. Dar clic en el botón "**Guardar App**":
-    <p align="center">
-      <img src="https://github.com/APIHub-CdC/imagenes-cdc/blob/master/selected_product.jpg" width="400">
-    </p>
-
-### Paso 2. Capturar los datos de la petición
-
-Los siguientes datos a modificar se encuentran en ***src/test/java/com/cdc/apihub/mx/RC/FicoScore/api/ReporteDeCreditoConFicoScoreApiTest.java***
-
-Es importante contar con el setUp() que se encargará de inicializar la url. Modificar la URL ***('the_url')*** de la petición del objeto ***$config***, como se muestra en el siguiente fragmento de código:
-
-```java
- private final ReporteDeCreditoConFicoScoreApi api = new ReporteDeCreditoConFicoScoreApi();
-
-@Before()
+public class ReporteDeCreditoConFicoScoreApiTest {
+	
+    private final ReporteDeCreditoConFicoScoreApi api = new ReporteDeCreditoConFicoScoreApi();
+    private Logger logger = LoggerFactory.getLogger(ReporteDeCreditoConFicoScoreApi.class.getName());
+    
+    private String keystoreFile = "/your_path/keystore.jks";
+	private String cdcCertFile = "/your_path/cdc_cert.pem";
+	private String keystorePassword = "your_password";
+	private String keyAlias = "your_alias";
+	private String keyPassword = "your_key_password";
+	
+	
+	@Before()
     public void setUp() {
+    	
     	ApiClient apiClient = api.getApiClient();
 		apiClient.setBasePath("the_url");
 		OkHttpClient okHttpClient = new OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS)
 				.addInterceptor(new SignerInterceptor(keystoreFile, cdcCertFile, keystorePassword, keyAlias, keyPassword)).build();
 		apiClient.setHttpClient(okHttpClient);
     }
-
-```
-
-En el archivo **DireccionesApiTest**, que se encuentra en ***src/test/java/com/cdc/apihub/mx/RC/FicoScore/api*** se deberá modificar el siguiente fragmento de código con los datos correspondientes:
-
-```java
-@Test
+    
+    @Test
     public void getReporteTest() throws ApiException {
         
         String xApiKey = "your_api_key";
@@ -129,15 +121,6 @@ En el archivo **DireccionesApiTest**, que se encuentra en ***src/test/java/com/c
 		}
 
     }
-```
-
-### Paso 3. Ejecutar la prueba unitaria
-
-Teniendo los pasos anteriores ya solo falta ejecutar la prueba unitaria, con el siguiente comando:
-
-```shell
-mvn test -Dmaven.install.skip=true
-```
-
----
-[TERMINOS Y CONDICIONES](https://github.com/APIHub-CdC/licencias-cdc)
+    
+ 
+}
