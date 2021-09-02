@@ -34,11 +34,11 @@ public class ReporteDeCreditoConFicoScoreApiTest {
     private final ReporteDeCreditoConFicoScoreApi api = new ReporteDeCreditoConFicoScoreApi();
     private Logger logger = LoggerFactory.getLogger(ReporteDeCreditoConFicoScoreApi.class.getName());
     
-    private String keystoreFile = "/Users/globatos/Documents/LLAVES_APIGEE/qa/keystore.jks";
-	private String cdcCertFile = "/Users/globatos/Documents/LLAVES_APIGEE/qa/cdc_cert.pem";
-	private String keystorePassword = "p@stgres";
-	private String keyAlias = "cdc";
-	private String keyPassword = "p@stgres";
+    private String keystoreFile = "/your_path/keystore.jks";
+	private String cdcCertFile = "/your_path/cdc_cert.pem";
+	private String keystorePassword = "your_password";
+	private String keyAlias = "your_alias";
+	private String keyPassword = "your_key_password";
 	
 	
 	@Before()
