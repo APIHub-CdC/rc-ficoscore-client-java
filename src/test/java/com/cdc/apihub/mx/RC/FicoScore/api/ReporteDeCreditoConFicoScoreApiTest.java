@@ -57,7 +57,7 @@ public class ReporteDeCreditoConFicoScoreApiTest {
         String xApiKey = "your_api_key";
         String username = "username";
         String password = "password";
-        String xFullReport = null;
+      
     	
         PersonaPeticion persona = new PersonaPeticion();
         DomicilioPeticion domicilio = new DomicilioPeticion();
@@ -84,41 +84,13 @@ public class ReporteDeCreditoConFicoScoreApiTest {
         
         
         
-        Respuesta response = api.getReporte(xApiKey, username, password, persona, xFullReport);
+        Respuesta response = api.getReporte(xApiKey, username, password, persona);
         
         Assert.assertTrue(response.getFolioConsulta() != null);
         
         logger.info(response.toString());
         
         
-        if (response.getFolioConsulta() != null && (xFullReport == null ||  xFullReport.equals("false") || xFullReport.equals("FALSE"))) {
-        	
-			String folioConsulta = response.getFolioConsulta();
-
-			Consultas consultas = api.getConsultas(folioConsulta, xApiKey, username, password);
-			logger.info(consultas.toString());
-			Assert.assertTrue(consultas.getConsultas() != null);
-
-			Creditos creditos = api.getCreditos(folioConsulta, xApiKey, username, password);
-			logger.info(creditos.toString());
-			Assert.assertTrue(creditos.getCreditos() != null);
-
-			DomiciliosRespuesta domicilios = api.getDomicilios(folioConsulta, xApiKey, username, password);
-			logger.info(domicilios.toString());
-			Assert.assertTrue(domicilios.getDomicilios() != null);
-
-			Empleos empleos = api.getEmpleos(folioConsulta, xApiKey, username, password);
-			logger.info(empleos.toString());
-			Assert.assertTrue(empleos.getEmpleos() != null);
-
-			Scores scores = api.getScores(folioConsulta, xApiKey, username, password);
-			logger.info(scores.toString());
-			Assert.assertTrue(scores.getScores() != null);
-			
-			Mensajes mensajes = api.getMensajes(folioConsulta, xApiKey, username, password);
-			logger.info(mensajes.toString());
-			Assert.assertTrue(mensajes.getMensajes() != null);
-		}
 
     }
     
