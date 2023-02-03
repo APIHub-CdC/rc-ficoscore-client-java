@@ -490,7 +490,7 @@ public class ReporteDeCreditoConFicoScoreApi {
         return call;
     }
     
-    public okhttp3.Call getReporteCall( String xApiKey, String username, String password, PersonaPeticion request, String xFullReport, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public okhttp3.Call getReporteCall( String xApiKey, String username, String password, PersonaPeticion request,  final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = request;
         String localVarPath = "";
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -502,8 +502,7 @@ public class ReporteDeCreditoConFicoScoreApi {
         localVarHeaderParams.put("username", apiClient.parameterToString(username));
         if (password != null)
         localVarHeaderParams.put("password", apiClient.parameterToString(password));
-        if (xFullReport != null)
-        localVarHeaderParams.put("x-full-report", apiClient.parameterToString(xFullReport));
+        
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
@@ -530,7 +529,7 @@ public class ReporteDeCreditoConFicoScoreApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    private okhttp3.Call getReporteValidateBeforeCall( String xApiKey, String username, String password, PersonaPeticion request, String xFullReport, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private okhttp3.Call getReporteValidateBeforeCall( String xApiKey, String username, String password, PersonaPeticion request,  final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
    
         if (xApiKey == null) {
             throw new ApiException("Missing the required parameter 'xApiKey' when calling getReporte(Async)");
@@ -545,22 +544,22 @@ public class ReporteDeCreditoConFicoScoreApi {
             throw new ApiException("Missing the required parameter 'request' when calling getReporte(Async)");
         }
         
-        okhttp3.Call call = getReporteCall( xApiKey, username, password, request, xFullReport, progressListener, progressRequestListener);
+        okhttp3.Call call = getReporteCall( xApiKey, username, password, request, progressListener, progressRequestListener);
         return call;
     }
     
-    public Respuesta getReporte( String xApiKey, String username, String password, PersonaPeticion request, String xFullReport) throws ApiException {
-        ApiResponse<Respuesta> resp = getReporteWithHttpInfo( xApiKey, username, password, request, xFullReport);
+    public Respuesta getReporte( String xApiKey, String username, String password, PersonaPeticion request) throws ApiException {
+        ApiResponse<Respuesta> resp = getReporteWithHttpInfo( xApiKey, username, password, request);
         return resp.getData();
     }
     
-    public ApiResponse<Respuesta> getReporteWithHttpInfo( String xApiKey, String username, String password, PersonaPeticion request, String xFullReport) throws ApiException {
-        okhttp3.Call call = getReporteValidateBeforeCall( xApiKey, username, password, request, xFullReport, null, null);
+    public ApiResponse<Respuesta> getReporteWithHttpInfo( String xApiKey, String username, String password, PersonaPeticion request) throws ApiException {
+        okhttp3.Call call = getReporteValidateBeforeCall( xApiKey, username, password, request, null, null);
         Type localVarReturnType = new TypeToken<Respuesta>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
     
-    public okhttp3.Call getReporteAsync(String xSignature, String xApiKey, String username, String password, PersonaPeticion request, String xFullReport, final ApiCallback<Respuesta> callback) throws ApiException {
+    public okhttp3.Call getReporteAsync(String xSignature, String xApiKey, String username, String password, PersonaPeticion request,  final ApiCallback<Respuesta> callback) throws ApiException {
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
         if (callback != null) {
@@ -577,7 +576,7 @@ public class ReporteDeCreditoConFicoScoreApi {
                 }
             };
         }
-        okhttp3.Call call = getReporteValidateBeforeCall( xApiKey, username, password, request, xFullReport, progressListener, progressRequestListener);
+        okhttp3.Call call = getReporteValidateBeforeCall( xApiKey, username, password, request, progressListener, progressRequestListener);
         
         return call;
     }
